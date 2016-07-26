@@ -33,15 +33,15 @@ end
 pp bruevich.result
 ```
 
-Also you can change iteratins ( by default - `[1, 10, 50, 100, 150]`).
+Also you can change iterations ( by default - `[1, 10, 50, 100, 150]`).
 
 ```
-bruevich = Bruevich.new(iteratins: [1, 2, 3, 4, 5])
+bruevich = Bruevich.new(iterations: [1, 2, 3, 4, 5])
 
 # or
 
 bruevich = Bruevich.new
-bruevich.iteratins = [1, 2, 3, 4, 5]
+bruevich.iterations = [1, 2, 3, 4, 5]
 ```
 
 ## Development
