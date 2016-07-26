@@ -22,7 +22,7 @@ Or install it yourself as:
 
 ## Usage
 
-```
+```ruby
 require 'pp'
 
 bruevich = Bruevich.new
@@ -35,7 +35,7 @@ pp bruevich.result
 
 Also you can change iterations ( by default - `[1, 10, 50, 100, 150]`).
 
-```
+```ruby
 bruevich = Bruevich.new(iterations: [1, 2, 3, 4, 5])
 
 # or
