@@ -13,7 +13,7 @@ class Bruevich
   def bench(title = 'empty')
     result[:title] = title
 
-    ITERATIONS.each do |count|
+    iterations.each do |count|
       result[count] = {}
       result[count][:time] = {}
       result[count][:time][:per_iteration] = []
@@ -49,7 +49,7 @@ class Bruevich
 private
 
   def calculate
-    result.each do |count, _|
+    iterations.each do |count, _|
       result[count][:time][:average] = result[count][:time][:total] / count
       result[count][:mem][:average] = result[count][:mem][:total] / count
     end

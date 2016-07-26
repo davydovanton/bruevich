@@ -63,7 +63,6 @@ bruevich.iterations = [1, 2, 3, 4, 5]
 }
 ```
 
-
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/bruevich. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
