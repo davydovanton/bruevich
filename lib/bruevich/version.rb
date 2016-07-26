@@ -1,3 +1,3 @@
-module Bruevich
+class Bruevich
   VERSION = "0.1.0"
 end
