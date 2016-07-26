@@ -22,7 +22,16 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```
+require 'pp'
+
+bruevich = Bruevich.new
+bruevich.bench do
+  (1..1_000_000).to_a
+end
+
+pp bruevich.result
+```
 
 ## Development
 
