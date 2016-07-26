@@ -10,7 +10,9 @@ class Bruevich
     @result = {}
   end
 
-  def bench
+  def bench(title = 'empty')
+    result[:title] = title
+
     ITERATIONS.each do |count|
       result[count] = {}
       result[count][:time] = {}

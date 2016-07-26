@@ -47,6 +47,7 @@ bruevich.iterations = [1, 2, 3, 4, 5]
 ### Returned values
 ```
 {
+  title: String
   iteration_count(Integer) => {
     time: {
       per_iteration: Array,
