@@ -5,7 +5,8 @@ class Bruevich
 
   attr_reader :result
 
-  def initialize
+  def initialize(iterations: nil)
+    @iterations = iterations
     @result = {}
   end
 
@@ -33,6 +34,14 @@ class Bruevich
     end
 
     calculate
+  end
+
+  def iterations
+    @iterations || ITERATIONS
+  end
+
+  def iterations=(values)
+    @iterations = Array(values)
   end
 
 private

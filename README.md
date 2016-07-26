@@ -33,6 +33,17 @@ end
 pp bruevich.result
 ```
 
+Also you can change iteratins ( by default - `[1, 10, 50, 100, 150]`).
+
+```
+bruevich = Bruevich.new(iteratins: [1, 2, 3, 4, 5])
+
+# or
+
+bruevich = Bruevich.new
+bruevich.iteratins = [1, 2, 3, 4, 5]
+```
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
