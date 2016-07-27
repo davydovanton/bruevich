@@ -28,7 +28,7 @@ bruevich.bench do
   (1..1_000_000).to_a
 end
 
-pp bruevich.result
+bruevich.result
 ```
 
 Also you can change iterations ( by default - `[1, 10, 50, 100, 150]`).
@@ -61,6 +61,26 @@ bruevich.iterations = [1, 2, 3, 4, 5]
 
   ...
 }
+```
+
+### Plotters
+You can use custom plotter classes. For this you need to create class with `plot` method:
+```ruby
+class MyPlotter
+  def plot(result, iterations)
+    # your code here
+  end
+end
+```
+
+And initialize bruevich class with it:
+```ruby
+bruevich = Bruevich.new(plotter: MyPlotter.new)
+bruevich.bench do
+  (1..1_000_000).to_a
+end
+
+bruevich.result # => your custom output
 ```
 
 ## Contributing
