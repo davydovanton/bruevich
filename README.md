@@ -42,6 +42,19 @@ bruevich = Bruevich.new
 bruevich.iterations = [1, 2, 3, 4, 5]
 ```
 
+## After callback
+``` ruby
+bruevich = Bruevich.new
+
+bruevich.after { puts 'done' }
+
+bruevich.bench do
+  (1..1_000_000).to_a
+end
+
+bruevich.result
+```
+
 ### Returned values
 `Bench` class returns hash with values. **Please notice that all memory values in kb**.
 
