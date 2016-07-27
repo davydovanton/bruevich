@@ -43,6 +43,8 @@ bruevich.iterations = [1, 2, 3, 4, 5]
 ```
 
 ### Returned values
+`Bench` class returns hash with values. **Please notice that all memory values in kb**.
+
 ```
 {
   title: String

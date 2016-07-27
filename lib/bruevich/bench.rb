@@ -17,13 +17,13 @@ class Bruevich
 
         GC.disable
         GC.start
-        mem_start = memory
+        mem_start = memory.current_value
 
         count.times do
           yield
         end
 
-        result[count][:mem][:total] = memory - mem_start
+        result[count][:mem][:total] = memory.current_value - mem_start
         GC.enable
         GC.start
 
@@ -67,7 +67,7 @@ class Bruevich
     end
 
     def memory
-      `ps ax -o pid,rss | grep -E "^[[:space:]]*#{$$}"`.strip.split.map(&:to_i).last
+      @memory ||= Memory.new
     end
   end
 end

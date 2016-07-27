@@ -1,6 +1,7 @@
 require "bruevich/version"
 require "bruevich/bench"
 require "bruevich/plotter"
+require "bruevich/memory"
 
 class Bruevich
   def initialize(iterations: nil, plotter: Plotter.new)
