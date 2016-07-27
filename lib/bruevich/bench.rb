@@ -24,6 +24,8 @@ class Bruevich
           mem = memory.current_value
           yield
           result[count][:mem][:full] << memory.current_value - mem
+
+          call_after_callback
         end
 
         GC.enable
