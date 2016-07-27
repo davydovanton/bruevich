@@ -20,10 +20,3 @@ class Bruevich
     @plotter.plot @bench.result, @bench.iterations
   end
 end
-
-bruevich = Bruevich.new
-bruevich.bench do
-  (1..1_000_000).to_a
-end
-
-bruevich.result
