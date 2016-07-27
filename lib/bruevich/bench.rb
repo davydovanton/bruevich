@@ -3,10 +3,12 @@ class Bruevich
     ITERATIONS = [1, 10, 50, 100, 150]
 
     attr_reader :result
+    attr_accessor :after_callback
 
     def initialize(iterations: nil)
       @iterations = iterations
       @result = {}
+      @after_callback = -> {}
     end
 
     def bench(title = 'empty')
@@ -17,23 +19,25 @@ class Bruevich
 
         GC.disable
         GC.start
-        mem_start = memory.current_value
 
         count.times do
+          mem = memory.current_value
           yield
+          result[count][:mem][:full] << memory.current_value - mem
         end
 
-        result[count][:mem][:total] = memory.current_value - mem_start
         GC.enable
         GC.start
 
-        time_start = Time.now
 
         count.times do
+          time = Time.now
           yield
+          result[count][:time][:full] << Time.now - time
+
+          call_after_callback
         end
 
-        result[count][:time][:total] = Time.now - time_start
       end
 
       calculate
@@ -49,18 +53,25 @@ class Bruevich
 
   private
 
+    def call_after_callback
+      after_callback.call
+    end
+
     def initialize_result(count)
       result[count] = {}
 
       result[count][:time] = {}
-      result[count][:time][:per_iteration] = []
+      result[count][:time][:full] = []
 
       result[count][:mem] = {}
-      result[count][:mem][:per_iteration] = []
+      result[count][:mem][:full] = []
     end
 
     def calculate
       iterations.each do |count, _|
+        result[count][:time][:total] = result[count][:time][:full].inject(&:+)
+        result[count][:mem][:total] = result[count][:mem][:full].inject(&:+)
+
         result[count][:time][:average] = result[count][:time][:total] / count
         result[count][:mem][:average] = result[count][:mem][:total] / count
       end

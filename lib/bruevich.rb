@@ -20,4 +20,8 @@ class Bruevich
   def result
     @plotter.plot @bench.result, @bench.iterations
   end
+
+  def after(&block)
+    @bench.after_callback = block
+  end
 end
