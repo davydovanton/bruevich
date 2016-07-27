@@ -1,61 +1,29 @@
 require "bruevich/version"
+require "bruevich/bench"
+require "bruevich/plotter"
 
 class Bruevich
-  ITERATIONS = [1, 10, 50, 100, 150]
-
-  attr_reader :result
-
-  def initialize(iterations: nil)
-    @iterations = iterations
-    @result = {}
+  def initialize(iterations: nil, plotter: Plotter.new)
+    @bench = Bench.new(iterations: iterations)
+    @plotter = plotter
   end
 
   def bench(title = 'empty')
-    result[:title] = title
-
-    iterations.each do |count|
-      result[count] = {}
-      result[count][:time] = {}
-      result[count][:time][:per_iteration] = []
-
-      result[count][:mem] = {}
-      result[count][:mem][:per_iteration] = []
-
-      GC.disable
-      GC.start
-      mem_start = memory
-      time_start = Time.now
-
-      count.times do
-        yield
-      end
-
-      result[count][:time][:total] = Time.now - time_start
-      result[count][:mem][:total] = memory - mem_start
-      GC.enable
-    end
-
-    calculate
-  end
-
-  def iterations
-    @iterations || ITERATIONS
+    @bench.bench(title) { yield }
   end
 
   def iterations=(values)
-    @iterations = Array(values)
+    @bench.iterations = Array(values)
   end
 
-private
-
-  def calculate
-    iterations.each do |count, _|
-      result[count][:time][:average] = result[count][:time][:total] / count
-      result[count][:mem][:average] = result[count][:mem][:total] / count
-    end
-  end
-
-  def memory
-    `ps ax -o pid,rss | grep -E "^[[:space:]]*#{$$}"`.strip.split.map(&:to_i).last
+  def result
+    @plotter.plot @bench.result, @bench.iterations
   end
 end
+
+bruevich = Bruevich.new
+bruevich.bench do
+  (1..1_000_000).to_a
+end
+
+bruevich.result
