@@ -25,7 +25,7 @@ class Bruevich
           yield
           result[count][:mem][:full] << memory.current_value - mem
 
-          call_after_callback
+          after_callback.call
         end
 
         GC.enable
@@ -37,7 +37,7 @@ class Bruevich
           yield
           result[count][:time][:full] << Time.now - time
 
-          call_after_callback
+          after_callback.call
         end
 
       end
@@ -54,10 +54,6 @@ class Bruevich
     end
 
   private
-
-    def call_after_callback
-      after_callback.call
-    end
 
     def initialize_result(count)
       result[count] = {}

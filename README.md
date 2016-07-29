@@ -70,7 +70,7 @@ bruevich.result
   mem: {
       per_iteration: Array,
       total: Integer,
-      average:Integer
+      average: Integer
     }
   },
 
