@@ -40,6 +40,20 @@ describe Bruevich::Bench do
     end
   end
 
+  describe '#iterations' do
+    describe 'when instance value set' do
+      it 'returns instance value' do
+        bench.iterations = [1]
+        bench.iterations.must_equal [1]
+      end
+    end
+
+    describe 'when instance value not set' do
+      it 'returns ITERATIONS' do
+        bench.iterations.must_equal Bruevich::Bench::ITERATIONS
+      end
+    end
+  end
 
   describe 'private' do
     describe '#initialize_result' do
