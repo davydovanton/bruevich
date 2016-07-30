@@ -45,10 +45,26 @@ describe Bruevich::Bench do
     describe '#initialize_result' do
       it 'sets empty data set for count in result hash' do
         bench.result.must_equal({})
-
         bench.send(:initialize_result, 1)
-
         bench.result.must_equal({ 1 => { time: { full: [] }, mem: { full: [] } } })
+      end
+    end
+
+    describe '#calculate' do
+      it 'sets average and totat time and memory values to result' do
+        bench.send(:initialize_result, 3)
+        bench.iterations = [3]
+
+        bench.result[3][:time][:full] = [0.1, 0.2, 0.3]
+        bench.result[3][:mem][:full] = [1, 2, 3]
+
+        bench.send(:calculate)
+
+        bench.result[3][:time][:total].round(1).must_equal 0.6
+        bench.result[3][:time][:average].round(1).must_equal 0.2
+
+        bench.result[3][:mem][:total].must_equal 6
+        bench.result[3][:mem][:average].must_equal 2
       end
     end
 
