@@ -1,6 +1,6 @@
 class Bruevich
   class Bench
-    ITERATIONS = [1, 10, 50, 100, 150]
+    ITERATIONS = [1, 10, 50, 100, 150].freeze
 
     attr_reader :result
     attr_accessor :after_callback
@@ -31,7 +31,6 @@ class Bruevich
         GC.enable
         GC.start
 
-
         count.times do
           time = Time.now
           yield
@@ -39,9 +38,7 @@ class Bruevich
 
           after_callback.call
         end
-
       end
-
       calculate
     end
 
