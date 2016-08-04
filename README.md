@@ -1,4 +1,5 @@
 # Bruevich
+[![Build Status](https://travis-ci.org/davydovanton/bruevich.svg?branch=master)](https://travis-ci.org/davydovanton/bruevich)
 
 Simple library for benching your code.
 
