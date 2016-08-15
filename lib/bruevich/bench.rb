@@ -1,14 +1,16 @@
 class Bruevich
   class Bench
     ITERATIONS = [1, 10, 50, 100, 150].freeze
+    EMPTY_LAMBDA = ->{}
 
     attr_reader :result
     attr_accessor :after_callback
 
-    def initialize(iterations: nil)
+    def initialize(iterations: nil, disable_memory: false)
       @iterations = iterations
       @result = {}
-      @after_callback = -> {}
+      @after_callback = EMPTY_LAMBDA
+      @disable_memory = disable_memory
     end
 
     def bench(title = 'empty')
@@ -17,19 +19,21 @@ class Bruevich
       iterations.each do |count|
         initialize_result(count)
 
-        GC.disable
-        GC.start
+        if inable_memory
+          GC.disable
+          GC.start
 
-        count.times do
-          mem = memory.current_value
-          yield
-          result[count][:mem][:full] << memory.current_value - mem
+          count.times do
+            mem = memory.current_value
+            yield
+            result[count][:mem][:full] << memory.current_value - mem
 
-          after_callback.call
+            after_callback.call
+          end
+
+          GC.enable
+          GC.start
         end
-
-        GC.enable
-        GC.start
 
         count.times do
           time = Time.now
@@ -51,6 +55,10 @@ class Bruevich
     end
 
   private
+
+    def inable_memory
+      !@disable_memory
+    end
 
     def initialize_result(count)
       result[count] = {}

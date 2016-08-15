@@ -4,8 +4,8 @@ require "bruevich/plotter"
 require "bruevich/memory"
 
 class Bruevich
-  def initialize(iterations: nil, plotter: Plotter.new)
-    @bench = Bench.new(iterations: iterations)
+  def initialize(iterations: nil, plotter: Plotter.new, disable_memory: false)
+    @bench = Bench.new(iterations: iterations, disable_memory: disable_memory)
     @plotter = plotter
   end
 
