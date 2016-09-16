@@ -68,7 +68,7 @@ bruevich.result
       total: Float,
       average: Float
     },
-  mem: {
+    mem: {
       per_iteration: Array,
       total: Integer,
       average: Integer
